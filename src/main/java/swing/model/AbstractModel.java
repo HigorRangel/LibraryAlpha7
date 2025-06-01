@@ -1,31 +1,36 @@
 package swing.model;
 
 
-import swing.annotations.NomeExibicao;
+import swing.annotations.DisplayableName;
 import swing.enums.Status;
+import swing.interfaces.Identifiable;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import java.io.Serializable;
 import java.time.Instant;
 
+/**
+ * Classe abstrata que representa um modelo base para todas as entidades do sistema.
+ */
 @MappedSuperclass
-public abstract class AbstractModel {
+public abstract class AbstractModel implements Identifiable, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NomeExibicao("ID")
+    @DisplayableName("ID")
     private Long id;
 
-    @NomeExibicao("Status")
+    @DisplayableName("Status")
     private Status status;
 
-    @NomeExibicao("Última Modificação")
-    private Instant ultimaModificacao;
+    @DisplayableName("Última Modificação")
+    private Instant lastModifiedAt;
 
-    @NomeExibicao("Criado em")
-    private Instant criadoEm;
+    @DisplayableName("Criado em")
+    private Instant createdAt;
 
     public Long getId() {
         return id;
@@ -43,19 +48,19 @@ public abstract class AbstractModel {
         this.status = status;
     }
 
-    public Instant getUltimaModificacao() {
-        return ultimaModificacao;
+    public Instant getLastModifiedAt() {
+        return lastModifiedAt;
     }
 
-    public void setUltimaModificacao(Instant ultimaModificacao) {
-        this.ultimaModificacao = ultimaModificacao;
+    public void setLastModifiedAt(Instant ultimaModificacao) {
+        this.lastModifiedAt = ultimaModificacao;
     }
 
-    public Instant getCriadoEm() {
-        return criadoEm;
+    public Instant getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCriadoEm(Instant criadoEm) {
-        this.criadoEm = criadoEm;
+    public void setCreatedAt(Instant createdAt) {
+        this.createdAt = createdAt;
     }
 }

@@ -1,101 +1,132 @@
 package swing.view;
 
-import swing.controller.LivroController;
+import swing.configs.GeneralProperties;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Classe principal da ‘interface’ gráfica do sistema de controlo de livros.
+ */
 public class MainView extends JFrame {
 
-    private JLabel titleLabel;
-    private JPanel painelConteudo;
+    /**
+     * Mapa para armazenar os botões de navegação.
+     */
+    final Map<String, JButton> navButtons = new HashMap<>();
+
+    /**
+     * Painel de navegação superior que contém os botões para mudar de tela.
+     */
     JPanel navBar;
+
+    /**
+     * Layout de cartões utilizado para alternar entre diferentes telas.
+     */
     CardLayout cardLayout = new CardLayout();
+
+    /**
+     * Barra de ferramentas que contém os botões de navegação.
+     */
     JToolBar toolBar1;
 
+    /**
+     * Painel de conteúdo que contém as diferentes telas do sistema.
+     */
+    private JPanel contentPanel;
 
-    Map<String, JButton> navButtons = new HashMap<>();
-
+    /**
+     * Construtor da classe MainView.
+     */
     public MainView() {
         initComponents();
     }
 
+    /**
+     * Inicializar os componentes da interface gráfica.
+     */
     private void initComponents() {
         setLayout(new BorderLayout());
-        setPreferredSize(new Dimension(800, 600));
-        setMinimumSize(new Dimension(800, 600));
-        setMaximumSize(new Dimension(800, 600));
-        setSize(new Dimension(800, 600));
+        setPreferredSize(new Dimension(900, 600));
+        setMinimumSize(new Dimension(900, 600));
+        setMaximumSize(new Dimension(900, 600));
+        setBackground(GeneralProperties.BACKGROUND_COLOR);
+        setSize(new Dimension(900, 600));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setTitle("Sistema de Controle de Livros");
-        criaMenuSuperior();
-        iniciarPainelConteudo();
-        //        pack();
-//        setVisible(true);
-
+        createTopMenu();
+        initContentPanel();
         setVisible(true);
-//        setBackground(Color.white);
-
-
-//        titleLabel = new JLabel("Sistema de Controle de Livros");
-//        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
-//        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-//        titleLabel.setPreferredSize(new Dimension(800, 25));
-//        add(titleLabel);
-//
-//        iniciarTabela();
-
-
     }
 
-    private void criaMenuSuperior() {
+    /**
+     * Cria o menu superior com os botões de navegação.
+     */
+    private void createTopMenu() {
         navBar = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        String[] telas = {"Livro", "Autor"};
+        navBar.setBackground(Color.RED);
+
+        String[] telas = {"Livro", "Autor", "Editora"};
         toolBar1 = new JToolBar();
         toolBar1.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+        toolBar1.setBackground(GeneralProperties.BACKGROUND_COLOR);
 
         for (String nome : telas) {
             JButton btn = new JButton(nome);
             btn.setFocusPainted(false);
             btn.setBorder(BorderFactory.createEmptyBorder(5, 15, 5, 15));
             btn.addActionListener(e -> {
-                trocarTela(nome);
-                destacarBotaoAtivo(nome);
+                chageScreen(nome);
+                highlightActiveButton(nome);
             });
             navButtons.put(nome, btn);
-
             toolBar1.add(btn);
         }
-
         add(toolBar1, BorderLayout.NORTH);
     }
 
 
-    private void iniciarPainelConteudo() {
-        painelConteudo = new JPanel();
+    /**
+     * Inicializa o painel de conteúdo que contém as diferentes telas do sistema.
+     */
+    private void initContentPanel() {
+        contentPanel = new JPanel();
+        contentPanel.setBackground(GeneralProperties.BACKGROUND_COLOR);
+
         cardLayout = new CardLayout();
-        painelConteudo.setLayout(cardLayout);
 
-        painelConteudo.add(new LivroView(), "Livro");
-        painelConteudo.add(new AutorView(), "Autor");
+        contentPanel.setLayout(cardLayout);
 
-        add(painelConteudo, BorderLayout.CENTER);
+        contentPanel.add(new BookView(), "Livro");
+        contentPanel.add(new AuthorView(), "Autor");
+        contentPanel.add(new PublisherView(), "Editora");
 
-        // Iniciar com "Livro"
-        trocarTela("Livro");
-        destacarBotaoAtivo("Livro");
+        add(contentPanel, BorderLayout.CENTER);
+
+        chageScreen("Livro");
+        highlightActiveButton("Livro");
     }
 
 
-    private void trocarTela(String nome) {
-        cardLayout.show(painelConteudo, nome);
+    /**
+     * Muda a tela exibida no painel de conteúdo.
+     *
+     * @param nome Nome da tela a ser exibida.
+     */
+    private void chageScreen(String nome) {
+        cardLayout.show(contentPanel, nome);
     }
 
-    private void destacarBotaoAtivo(String ativo) {
+
+    /**
+     * Destaca o botão ativo na barra de navegação.
+     *
+     * @param ativo Nome do botão ativo.
+     */
+    private void highlightActiveButton(String ativo) {
         for (Map.Entry<String, JButton> entry : navButtons.entrySet()) {
             JButton btn = entry.getValue();
             if (entry.getKey().equals(ativo)) {

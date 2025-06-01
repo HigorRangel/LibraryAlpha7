@@ -1,0 +1,21 @@
+title,authors,publishers,isbn,publicationDate
+1984,George Orwell,Secker & Warburg,9780451524935,1949-06-08
+Dom Quixote,Miguel de Cervantes,Francisco de Robles,9780060934347,1605-01-16
+O Pequeno Príncipe,Antoine de Saint-Exupéry,Reynal & Hitchcock,9780156012195,1943-04-06
+Cem Anos de Solidão,Gabriel García Márquez,Editorial Sudamericana;Penguin,9780060883287,1967-05-30
+Orgulho e Preconceito,Jane Austen,T. Egerton; Whitehall,9780141439518,1813-01-28
+A Revolução dos Bichos,George Orwell,Secker & Warburg; Harcourt,9780452284241,1945-08-17
+Crime e Castigo,Fyodor Dostoevsky,The Russian Messenger,9780486415871,1866-01-01
+O Senhor dos Anéis,J. R. R. Tolkien,Allen & Unwin; HarperCollins,9780544003415,1954-07-29
+Harry Potter e a Pedra Filosofal,J. K. Rowling,Bloomsbury; Scholastic,9788532511010,1997-06-26
+O Apanhador no Campo de Centeio,J. D. Salinger,Little, Brown and Company,9780316769488,1951-07-16
+A Metamorfose,Franz Kafka,Kurt Wolff Verlag; Modern Library,9780805210570,1915-10-01
+O Grande Gatsby,F. Scott Fitzgerald,Charles Scribner's Sons,9780743273565,1925-04-10
+Moby Dick,Herman Melville; William Reese,Richard Bentley; Harper & Brothers,9781503280786,1851-10-18
+Ulisses,James Joyce,Sylvia Beach; Shakespeare and Company,9780199535675,1922-02-02
+A Divina Comédia,Dante Alighieri,N/A,9780142437223,1320-01-01
+Guerra e Paz,Leo Tolstoy,The Russian Messenger; Vintage,9781400079988,1869-01-01
+O Hobbit,J. R. R. Tolkien,Allen & Unwin; Houghton Mifflin,9780261102217,1937-09-21
+A Arte da Guerra,Sun Tzu; Thomas Cleary,N/A,9781590302255,-0500-01-01
+Os Miseráveis,Victor Hugo,A. Lacroix; Verboeckhoven & Cie.,9780451419439,1862-01-01
+O Nome da Rosa,Umberto Eco; William Weaver,Bompiani; Harcourt,9780544176560,1980-01-01

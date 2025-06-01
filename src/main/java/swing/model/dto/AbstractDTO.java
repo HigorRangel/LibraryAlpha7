@@ -1,38 +1,41 @@
 package swing.model.dto;
 
-import swing.annotations.NomeExibicao;
+import swing.annotations.DisplayableName;
 import swing.enums.Status;
-import swing.util.DataUtils;
+import swing.interfaces.Identifiable;
+import swing.util.DateUtils;
 
-import java.text.SimpleDateFormat;
 import java.time.Instant;
-import java.time.Instant;
 
-public class AbstractDTO  {
+/**
+ * Classe abstrata que representa um DTO (Data Transfer Object) com campos comuns
+ * para identificação, data de criação, data da última modificação e status.
+ */
+public abstract class AbstractDTO implements Identifiable {
 
-    @NomeExibicao("ID")
+    @DisplayableName("ID")
     Long id;
 
-    @NomeExibicao("Criado em")
-    String criadoEm;
+    @DisplayableName("Criado em")
+    String createdAt;
 
-    @NomeExibicao("Última Modificação")
-    String ultimaModificacao;
+    @DisplayableName("Última Modificação")
+    String lastModifiedAt;
 
-    @NomeExibicao("Status")
+    @DisplayableName("Status")
     String status;
 
-    Instant ultimaModificacaoDateTime;
+    Instant lastModifiedDateTime;
 
-    Instant criadoEmDateTime;
-    
-    public AbstractDTO() {
+    Instant createdAtDateTime;
+
+    protected AbstractDTO() {
     }
-    
-    public AbstractDTO(Long id, Instant criadoEm, Instant ultimaModificacao, Status status) {
+
+    protected AbstractDTO(Long id, Instant createdAt, Instant lastModifiedAt, Status status) {
         this.id = id;
-        this.setCriadoEm(criadoEm);
-        this.setUltimaModificacao(ultimaModificacao);
+        this.setCreatedAt(createdAt);
+        this.setLastModifiedAt(lastModifiedAt);
         this.status = (status == null) ? null : status.name();
     }
 
@@ -45,47 +48,65 @@ public class AbstractDTO  {
         this.id = id;
     }
 
-    public String getCriadoEm() {
-        return criadoEm;
+    public Instant getCreatedAt() {
+        return createdAtDateTime;
     }
 
-    public Instant getCriadoEmDateTime() {
-        return criadoEmDateTime;
-    }
-
-    public void setCriadoEm(Instant criadoEmDateTime) {
-        this.criadoEmDateTime = criadoEmDateTime;
-        if(criadoEmDateTime == null) {
-            this.criadoEm = null;
+    public void setCreatedAt(Instant createdAt) {
+        this.createdAtDateTime = createdAt;
+        if (createdAt == null) {
+            this.createdAt = null;
             return;
         }
-        this.criadoEm = DataUtils.formatarDataParaString(criadoEmDateTime, false);
+        this.createdAt = DateUtils.dateToText(createdAt, false);
     }
 
-
-    public String getUltimaModificacao() {
-        return ultimaModificacao;
+    public Instant getLastModifiedAt() {
+        return lastModifiedDateTime;
     }
 
-    public Instant getUltimaModificacaoDateTime() {
-        return ultimaModificacaoDateTime;
-    }
-
-    public void setUltimaModificacao(Instant date) {
-        this.ultimaModificacaoDateTime = date;
-        if(date == null) {
-            this.ultimaModificacao = null;
+    public void setLastModifiedAt(Instant date) {
+        this.lastModifiedDateTime = date;
+        if (date == null) {
+            this.lastModifiedAt = null;
             return;
         }
-        this.ultimaModificacao = DataUtils.formatarDataParaString(date, false);
+        this.lastModifiedAt = DateUtils.dateToText(date, false);
     }
 
-    public String getStatus() {
-        return status;
+    /**
+     * Retorna a data da última modificação formatada como ‘String’.
+     *
+     * @return A data da última modificação formatada como ‘String’ no formato "dd/MM/yyyy HH:mm:ss".
+     */
+    public String getUltimaModificacaoString() {
+        return DateUtils.dateToText(createdAtDateTime, false);
+    }
+
+    public Status getStatus() {
+        return this.status == null ? null : Status.fromCharacter(this.status);
+    }
+
+    @Override
+    public void setStatus(Status status) {
+        if (status == null) {
+            this.status = null;
+        } else {
+            this.status = status.name();
+        }
     }
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    /**
+     * Retorna o status como uma ‘String’.
+     *
+     * @return A String representando o status, ou null se o status for nulo.
+     */
+    public String getStatusString() {
+        return this.status;
     }
 
     //</editor-fold>
