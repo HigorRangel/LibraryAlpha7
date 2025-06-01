@@ -9,11 +9,12 @@ import java.awt.*;
 public class GeneralProperties {
 
     public static final Color TABLE_HOVER_COLOR = new Color(240, 240, 240);
-    public static final Color TABLE_SELECTION_COLOR = new Color(225, 200, 255);
+    public static final Color TABLE_SELECTION_COLOR = new Color(247, 255, 204);
     public static final int PRIMARY_RADIUS = 15;
     public static final int SECONDARY_RADIUS = 12;
     public static final Color BACKGROUND_COLOR = Color.WHITE;
-    public static final Color PRIMARY_COLOR = new Color(116, 57, 168);
+    public static final Color PRIMARY_COLOR = new Color(25, 62, 115);
+    public static final Color SECONDARY_COLOR = new Color(168, 203, 17);
     public static final int PRIMARY_THICKNESS = 3;
     public static final Color TRANSPARENT_COLOR = new Color(0, 0, 0, 0);
     public static final String ICONS_ADD_PNG = "/icons/add.png";

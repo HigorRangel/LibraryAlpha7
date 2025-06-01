@@ -69,7 +69,7 @@ public class MainView extends JFrame {
         navBar = new JPanel(new FlowLayout(FlowLayout.LEFT));
         navBar.setBackground(Color.RED);
 
-        String[] telas = {"Livro", "Autor", "Editora"};
+        String[] telas = {"Dashboard", "Livro", "Autor", "Editora"};
         toolBar1 = new JToolBar();
         toolBar1.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
         toolBar1.setBackground(GeneralProperties.BACKGROUND_COLOR);
@@ -79,7 +79,7 @@ public class MainView extends JFrame {
             btn.setFocusPainted(false);
             btn.setBorder(BorderFactory.createEmptyBorder(5, 15, 5, 15));
             btn.addActionListener(e -> {
-                chageScreen(nome);
+                changeScreen(nome);
                 highlightActiveButton(nome);
             });
             navButtons.put(nome, btn);
@@ -103,11 +103,12 @@ public class MainView extends JFrame {
         contentPanel.add(new BookView(), "Livro");
         contentPanel.add(new AuthorView(), "Autor");
         contentPanel.add(new PublisherView(), "Editora");
+        contentPanel.add(new DashboardView(), "Dashboard");
 
         add(contentPanel, BorderLayout.CENTER);
 
-        chageScreen("Livro");
-        highlightActiveButton("Livro");
+        changeScreen("Dashboard");
+        highlightActiveButton("Dashboard");
     }
 
 
@@ -116,7 +117,7 @@ public class MainView extends JFrame {
      *
      * @param nome Nome da tela a ser exibida.
      */
-    private void chageScreen(String nome) {
+    private void changeScreen(String nome) {
         cardLayout.show(contentPanel, nome);
     }
 
@@ -130,10 +131,12 @@ public class MainView extends JFrame {
         for (Map.Entry<String, JButton> entry : navButtons.entrySet()) {
             JButton btn = entry.getValue();
             if (entry.getKey().equals(ativo)) {
-                btn.setBackground(Color.LIGHT_GRAY);
+                btn.setBackground(GeneralProperties.PRIMARY_COLOR);
+                btn.setForeground(Color.WHITE);
                 btn.setFont(btn.getFont().deriveFont(Font.BOLD));
             } else {
                 btn.setBackground(null);
+                btn.setForeground(Color.BLACK);
                 btn.setFont(btn.getFont().deriveFont(Font.PLAIN));
             }
         }
